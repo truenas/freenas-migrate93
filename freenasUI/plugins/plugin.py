@@ -26,28 +26,12 @@
 #####################################################################
 import platform
 
-JAILS_INDEX = "http://download.freenas.org"
 
+if platform.machine() == 'amd64':
+    __arch = 'x64'
+else:
+    __arch = 'x32'
 
-#
-# get_jails_index()
-#
-# Get the proper CDN path for jail tarballs
-#
-def get_jails_index(release=None, arch=None):
-
-    if arch is None:
-        arch = platform.architecture()
-        if arch[0] == '64bit':
-            arch = 'x64'
-        else:
-            arch = 'x86'
-
-    if release is None:
-        release = "latest"
-
-    index = "%s/%s/RELEASE/%s/jails" % (
-        JAILS_INDEX, release, arch
-    )
-
-    return index
+PLUGINS_INDEX = 'http://download.freenas.org/plugins/9/%s' % __arch
+PLUGINS_META = '%s/pbi-meta' % PLUGINS_INDEX
+PLUGINS_REPO = '%s/pbi-repo.rpo' % PLUGINS_META
