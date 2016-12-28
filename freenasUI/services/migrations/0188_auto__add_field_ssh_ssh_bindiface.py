@@ -10,7 +10,8 @@ class Migration(SchemaMigration):
         db.add_column(u'services_ssh', 'ssh_bindiface',
                       self.gf('freenasUI.freeadmin.models.fields.MultiSelectField')(default='', max_length=350, blank=True),
                       keep_default=False)
-
+        if not db.dry_run:
+            orm['services.SSH'].objects.update(ssh_bindiface='')
 
     def backwards(self, orm):
         # Deleting field 'SSH.ssh_bindiface'
