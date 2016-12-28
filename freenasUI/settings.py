@@ -110,6 +110,10 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'south',
     'freenasUI.account',
+    'freenasUI.api',
+    'freenasUI.jails',
+    'freenasUI.plugins',
+    'freenasUI.support',
     'freenasUI.directoryservice',
     'freenasUI.network',
     'freenasUI.services',
@@ -117,6 +121,7 @@ INSTALLED_APPS = (
     'freenasUI.storage',
     'freenasUI.system',
     'freenasUI.tasks',
+    'freenasUI.vcp'
 )
 
 FORCE_SCRIPT_NAME = ''
