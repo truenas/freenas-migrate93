@@ -10,6 +10,8 @@ class Migration(SchemaMigration):
         db.add_column(u'services_afp', 'afp_srv_bindip',
                       self.gf('freenasUI.freeadmin.models.fields.MultiSelectField')(default='', max_length=255, blank=True),
                       keep_default=False)
+        if not db.dry_run:
+            orm['services.AFP'].objects.update(afp_srv_bindip='')
 
 
     def backwards(self, orm):
