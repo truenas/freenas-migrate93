@@ -24,7 +24,7 @@
 #
 #####################################################################
 
-from .utils import run_syncdb
+from utils import run_syncdb
 
 if __name__ == '__main__':
     run_syncdb()
