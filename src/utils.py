@@ -25,9 +25,11 @@
 #####################################################################
 import os
 import sys
+
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'freenasUI.settings')
 
+from django.core.management import call_command
 from django.db import models
 
 
@@ -38,3 +40,8 @@ def get_app(name):
 
 def getQ():
     return models.Q
+
+
+def run_syncdb():
+    models.loading.cache.get_apps()
+    call_command('syncdb', interactive=False, merge=True, delete_ghosts=True, migrate=True)
