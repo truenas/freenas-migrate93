@@ -1,11 +1,6 @@
 # -*- coding: utf-8 -*-
-import datetime
-import os
 import platform
-import time
-from south.db import db
 from south.v2 import DataMigration
-from django.db import models
 
 from freenasUI.jails.utils import get_jails_index
 

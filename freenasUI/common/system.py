@@ -25,14 +25,9 @@
 #
 #####################################################################
 import logging
-import os
 import re
-import sqlite3
-import subprocess
-from datetime import datetime, timedelta
 
 from django.conf import settings
-from django.utils.translation import ugettext_lazy as _
 
 FREENAS_DATABASE = settings.DATABASE_PATH
 RE_MOUNT = re.compile(

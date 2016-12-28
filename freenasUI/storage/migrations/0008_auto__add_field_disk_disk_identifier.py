@@ -1,11 +1,8 @@
 # encoding: utf-8
 from subprocess import Popen, PIPE
-import datetime
 import re
 
-from django.db import models
 
-from lxml import etree
 from south.db import db
 from south.v2 import DataMigration
 

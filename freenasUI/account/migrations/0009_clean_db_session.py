@@ -1,8 +1,7 @@
 # encoding: utf-8
-import datetime
-from south.db import db
 from south.v2 import DataMigration
-from django.db import models, transaction, connection
+from django.db import connection
+from django.db import transaction
 
 class Migration(DataMigration):
 

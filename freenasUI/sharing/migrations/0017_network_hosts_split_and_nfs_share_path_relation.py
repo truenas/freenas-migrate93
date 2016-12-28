@@ -1,10 +1,7 @@
 # -*- coding: utf-8 -*-
-import datetime
 import re
 from ipaddress import ip_network
-from south.db import db
 from south.v2 import DataMigration
-from django.db import models
 
 class Migration(DataMigration):
 

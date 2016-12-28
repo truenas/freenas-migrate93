@@ -1,10 +1,7 @@
 # encoding: utf-8
-import datetime
 import re
 
-from south.db import db
 from south.v2 import DataMigration
-from django.db import models
 
 def toNtp(orm, entry):
     entry = re.sub('\s+', ' ', entry).strip()

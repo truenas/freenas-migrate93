@@ -112,9 +112,6 @@ class StartNotify(threading.Thread):
 
 class notifier:
 
-    from os import system as __system
-    from pwd import getpwnam as ___getpwnam
-    from grp import getgrnam as ___getgrnam
     IDENTIFIER = 'notifier'
 
     def is_freenas(self):

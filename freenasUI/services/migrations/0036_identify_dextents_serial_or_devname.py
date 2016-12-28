@@ -1,10 +1,7 @@
 # encoding: utf-8
 from subprocess import Popen, PIPE
-import datetime
 import re
-from south.db import db
 from south.v2 import DataMigration
-from django.db import models
 
 def serial_from_device(self, devname):
     p1 = Popen(["/usr/local/sbin/smartctl", "-i", "/dev/%s" % devname], stdout=PIPE)

@@ -2,10 +2,7 @@
 import base64
 import os
 
-from south.utils import datetime_utils as datetime
-from south.db import db
 from south.v2 import DataMigration
-from django.db import models
 
 class Migration(DataMigration):
 

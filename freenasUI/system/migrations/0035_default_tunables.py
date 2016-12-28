@@ -1,10 +1,7 @@
 # encoding: utf-8
-import datetime
 import os
 import platform
-from south.db import db
 from south.v2 import DataMigration
-from django.db import models
 
 
 def get_default_tunables():
