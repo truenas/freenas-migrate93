@@ -31,12 +31,25 @@ import os
 import sys
 
 defaultdb = os.environ.get('93_DATABASE_PATH')
-parser = argparse.ArgumentParser()
-parser.add_argument(
-    '--file', '-f', help='Path to 9.3 database file', required=not bool(defaultdb), default=defaultdb
-)
-parser.add_argument('--secret', '-s', help='Path to 9.3 password encryption seed', required=False)
-args = parser.parse_args()
+
+
+class DummyArgs():
+    def __init__(self, file=None, secret=None):
+        self.file = file
+        self.secret = secret
+
+
+if defaultdb:
+    args = DummyArgs(file=defaultdb)
+else:
+    parser = argparse.ArgumentParser()
+    parser.add_argument(
+        '--file', '-f', help='Path to 9.3 database file', required=True
+    )
+    parser.add_argument(
+        '--secret', '-s', help='Path to 9.3 password encryption seed', required=False
+    )
+    args = parser.parse_args()
 
 sys.path.append('/usr/local/lib')
 
