@@ -33,13 +33,12 @@ from django.core.management import call_command
 from django.db import models
 
 
+Q = models.Q
+
+
 def get_app(name):
     models.loading.cache.get_apps()
     return models.get_app(name)
-
-
-def getQ():
-    return models.Q
 
 
 def run_syncdb():
