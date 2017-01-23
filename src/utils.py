@@ -23,9 +23,7 @@
 # POSSIBILITY OF SUCH DAMAGE.
 #
 #####################################################################
-from __future__ import print_function
 import os
-import sqlite3
 import sys
 
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
@@ -33,7 +31,6 @@ os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'freenasUI.settings')
 
 from django.core.management import call_command
 from django.db import models
-from freenasUI import settings
 
 
 Q = models.Q
@@ -45,17 +42,5 @@ def get_app(name):
 
 
 def run_syncdb():
-    db_path = settings.DATABASES['default']['NAME']
-    if os.path.exists(db_path):
-        conn = sqlite3.connect(db_path)
-        cur = conn.cursor()
-        cur.execute("SELECT name FROM sqlite_master WHERE type='table' and name='django_migrations'")
-        data = cur.fetchall()
-        cur.close()
-        conn.close()
-        if data:
-            print("Database file is too new to run in migrate93")
-            sys.exit(0)
-
     models.loading.cache.get_apps()
     call_command('syncdb', interactive=False, merge=True, delete_ghosts=True, migrate=True)
