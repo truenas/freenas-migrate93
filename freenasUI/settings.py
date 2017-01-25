@@ -119,7 +119,7 @@ ROOT_URLCONF = 'freenasUI.urls'
 
 SESSION_ENGINE = 'django.contrib.sessions.backends.file'
 
-INSTALLED_APPS = (
+INSTALLED_APPS = [
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
@@ -138,7 +138,16 @@ INSTALLED_APPS = (
     'freenasUI.system',
     'freenasUI.tasks',
     'freenasUI.vcp'
-)
+]
+
+if os.path.exists('/etc/version'):
+    with open('/etc/version', 'r') as f:
+        version = f.read().lower()
+    if 'truenas' in version:
+        INSTALLED_APPS += [
+            'freenasUI.truenas',
+            'freenasUI.failover',
+        ]
 
 FORCE_SCRIPT_NAME = ''
 

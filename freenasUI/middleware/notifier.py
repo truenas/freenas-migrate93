@@ -115,6 +115,11 @@ class notifier:
     IDENTIFIER = 'notifier'
 
     def is_freenas(self):
+        if os.path.exists('/etc/version'):
+            with open('/etc/version', 'r') as f:
+                version = f.read().lower()
+            if 'truenas' in version:
+                return False
         return True
 
     def _system(self, command):
