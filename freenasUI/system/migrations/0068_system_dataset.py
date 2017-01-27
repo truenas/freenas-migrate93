@@ -6,7 +6,7 @@ class Migration(DataMigration):
 
     def forwards(self, orm):
         if db.dry_run:
-            return 
+            return
 
         try:
              adv = orm['system.Advanced'].objects.all()[0]
@@ -16,7 +16,7 @@ class Migration(DataMigration):
 
              sys.sys_pool = adv.adv_system_pool
              sys.sys_syslog_usedataset = adv.adv_syslog_usedataset
-             sys.sys_rrd_usedataset = False
+             sys.sys_rrd_usedataset = True
              sys.save()
 
         except Exception as e:
