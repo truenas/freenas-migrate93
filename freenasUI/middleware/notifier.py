@@ -59,7 +59,7 @@ GELI_KEY_SLOT = 0
 GELI_RECOVERY_SLOT = 1
 SYSTEMPATH = '/var/db/system'
 PWENC_BLOCK_SIZE = 32
-PWENC_PADDING = b'{'
+PWENC_PADDING = '{'
 PWENC_CHECK = 'Donuts!'
 BACKUP_SOCK = '/var/run/backupd.sock'
 
