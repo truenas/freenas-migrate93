@@ -109,7 +109,7 @@ class Migration(DataMigration):
     def forwards(self, orm):
 
         RE_GPT = re.compile(r'\bgpt/a?da\d+\b', re.I|re.M)
-        status = Popen(["zpool", "import"], stdout=PIPE).communicate()[0]
+        status = Popen(["zpool", "import"], stdout=PIPE).communicate()[0].decode('utf8', 'ignore')
         i = 0
         for label in RE_GPT.findall(status):
             part = identifier_to_partition("{label}%s" % label)
