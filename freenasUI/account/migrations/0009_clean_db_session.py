@@ -7,11 +7,7 @@ class Migration(DataMigration):
 
     def forwards(self, orm):
         "Write your forwards methods here."
-        cursor = connection.cursor()
-
         orm['sessions.session'].objects.all().delete()
-        cursor.execute("VACUUM")
-        transaction.commit_unless_managed()
 
 
     def backwards(self, orm):
