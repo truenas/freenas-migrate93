@@ -695,7 +695,7 @@ class notifier:
             AES.MODE_CTR,
             counter=Counter.new(64, prefix=nonce),
         )
-        return cipher.decrypt(encrypted).rstrip(PWENC_PADDING).decode('utf8')
+        return cipher.decrypt(encrypted).decode('utf8').rstrip(PWENC_PADDING)
 
 
 def usage():
