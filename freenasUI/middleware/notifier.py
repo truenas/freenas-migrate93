@@ -50,8 +50,6 @@ import sys
 import threading
 import time
 
-WWW_PATH = "/usr/local/www"
-FREENAS_PATH = os.path.join(WWW_PATH, "freenasUI")
 NEED_UPDATE_SENTINEL = '/data/need-update'
 VERSION_FILE = '/etc/version'
 GELI_KEYPATH = '/data/geli'
@@ -63,14 +61,6 @@ PWENC_PADDING = '{'
 PWENC_CHECK = 'Donuts!'
 BACKUP_SOCK = '/var/run/backupd.sock'
 
-sys.path.append(WWW_PATH)
-sys.path.append(FREENAS_PATH)
-
-os.environ["DJANGO_SETTINGS_MODULE"] = "freenasUI.settings"
-
-# Make sure to load all modules
-from django.db.models.loading import cache
-cache.get_apps()
 
 RE_DSKNAME = re.compile(r'^([a-z]+)([0-9]+)$')
 log = logging.getLogger('middleware.notifier')
