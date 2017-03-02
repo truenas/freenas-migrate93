@@ -170,7 +170,7 @@ class Migration(SchemaMigration):
             'secondary_email': ('django.db.models.fields.EmailField', [], {'max_length': '200', 'blank': 'True'}),
             'secondary_name': ('django.db.models.fields.CharField', [], {'max_length': '200', 'blank': 'True'}),
             'secondary_phone': ('django.db.models.fields.CharField', [], {'max_length': '200', 'blank': 'True'}),
-            'seconday_title': ('django.db.models.fields.CharField', [], {'max_length': '200', 'blank': 'True'}),
+            'secondary_title': ('django.db.models.fields.CharField', [], {'max_length': '200', 'blank': 'True'}),
             'title': ('django.db.models.fields.CharField', [], {'max_length': '200', 'blank': 'True'})
         },
         u'system.systemdataset': {
