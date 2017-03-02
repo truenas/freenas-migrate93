@@ -11,7 +11,7 @@ class Migration(SchemaMigration):
         # Adding model 'Support'
         db.create_table(u'system_support', (
             (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('enabled', self.gf('django.db.models.fields.BooleanField')(default=False)),
+            ('enabled', self.gf('django.db.models.fields.BooleanField')(default=None, null=True)),
             ('name', self.gf('django.db.models.fields.CharField')(max_length=200, blank=True)),
             ('title', self.gf('django.db.models.fields.CharField')(max_length=200, blank=True)),
             ('email', self.gf('django.db.models.fields.EmailField')(max_length=200, blank=True)),
@@ -25,10 +25,12 @@ class Migration(SchemaMigration):
 
         if not db.dry_run:
             support = orm['system.Support'].objects.create()
-            support.enabled = False
+            support.enabled = None
             adv = orm['system.Advanced'].objects.order_by('-id')
             if adv.exists():
                 adv = adv[0]
+                if adv.adv_ixalert:
+                    support.enabled = adv.adv_ixalert
                 if adv.adv_ixfailsafe_email:
                     support.secondary_email = adv.adv_ixfailsafe_email
             support.save()
