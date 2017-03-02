@@ -17,7 +17,7 @@ class Migration(SchemaMigration):
             ('email', self.gf('django.db.models.fields.EmailField')(max_length=200, blank=True)),
             ('phone', self.gf('django.db.models.fields.CharField')(max_length=200, blank=True)),
             ('secondary_name', self.gf('django.db.models.fields.CharField')(max_length=200, blank=True)),
-            ('seconday_title', self.gf('django.db.models.fields.CharField')(max_length=200, blank=True)),
+            ('secondary_title', self.gf('django.db.models.fields.CharField')(max_length=200, blank=True)),
             ('secondary_email', self.gf('django.db.models.fields.EmailField')(max_length=200, blank=True)),
             ('secondary_phone', self.gf('django.db.models.fields.CharField')(max_length=200, blank=True)),
         ))
@@ -190,7 +190,7 @@ class Migration(SchemaMigration):
             'secondary_email': ('django.db.models.fields.EmailField', [], {'max_length': '200', 'blank': 'True'}),
             'secondary_name': ('django.db.models.fields.CharField', [], {'max_length': '200', 'blank': 'True'}),
             'secondary_phone': ('django.db.models.fields.CharField', [], {'max_length': '200', 'blank': 'True'}),
-            'seconday_title': ('django.db.models.fields.CharField', [], {'max_length': '200', 'blank': 'True'}),
+            'secondary_title': ('django.db.models.fields.CharField', [], {'max_length': '200', 'blank': 'True'}),
             'title': ('django.db.models.fields.CharField', [], {'max_length': '200', 'blank': 'True'})
         },
         u'system.systemdataset': {
