@@ -163,7 +163,7 @@ class Migration(SchemaMigration):
         u'system.support': {
             'Meta': {'object_name': 'Support'},
             'email': ('django.db.models.fields.EmailField', [], {'max_length': '200', 'blank': 'True'}),
-            'enabled': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
+            'enabled': ('django.db.models.fields.NullBooleanField', [], {'default': 'False'}),
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'name': ('django.db.models.fields.CharField', [], {'max_length': '200', 'blank': 'True'}),
             'phone': ('django.db.models.fields.CharField', [], {'max_length': '200', 'blank': 'True'}),
