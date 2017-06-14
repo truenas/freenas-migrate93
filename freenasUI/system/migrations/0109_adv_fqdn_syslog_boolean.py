@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 import os
+from django.db.utils import OperationalError
 from south.db import db
 from south.v2 import DataMigration
 
@@ -7,11 +8,20 @@ from south.v2 import DataMigration
 class Migration(DataMigration):
 
     def forwards(self, orm):
-        for o in orm['system.Advanced'].objects.all():
-            # Previous migration did put literal 'False' in the field
-            # instead of 0/1. This is a known sqlite3 driver bug.
-            o.adv_fqdn_syslog = o.adv_fqdn_syslog
-            o.save()
+        try:
+            for o in orm['system.Advanced'].objects.all():
+                # Previous migration did put literal 'False' in the field
+                # instead of 0/1. This is a known sqlite3 driver bug.
+                o.adv_fqdn_syslog = o.adv_fqdn_syslog
+                o.save()
+        except OperationalError:
+            # This migration was missed on 9.10.2-UX so we need to workaround it and make it manual.
+            # See #24514.
+            for i in db.execute('SELECT id, adv_fqdn_syslog FROM system_advanced'):
+                if i[1] in (False, 'False', 'false', '0'):
+                    db.execute('UPDATE system_advanced SET adv_fqdn_syslog = 0')
+                else:
+                    db.execute('UPDATE system_advanced SET adv_fqdn_syslog = 1')
 
     def backwards(self, orm):
         pass
