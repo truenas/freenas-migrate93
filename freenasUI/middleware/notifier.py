@@ -57,7 +57,7 @@ GELI_KEY_SLOT = 0
 GELI_RECOVERY_SLOT = 1
 SYSTEMPATH = '/var/db/system'
 PWENC_BLOCK_SIZE = 32
-PWENC_PADDING = '{'
+PWENC_PADDING = b'{'
 PWENC_CHECK = 'Donuts!'
 BACKUP_SOCK = '/var/run/backupd.sock'
 
@@ -660,6 +660,8 @@ class notifier:
         return secret
 
     def pwenc_encrypt(self, text):
+        if not isinstance(text, bytes):
+            text = text.encode('utf8')
         from Crypto.Random import get_random_bytes
         from Crypto.Util import Counter
         pad = lambda x: x + (PWENC_BLOCK_SIZE - len(x) % PWENC_BLOCK_SIZE) * PWENC_PADDING
