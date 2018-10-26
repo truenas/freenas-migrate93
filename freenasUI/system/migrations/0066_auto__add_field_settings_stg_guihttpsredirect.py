@@ -8,10 +8,10 @@ class Migration(DataMigration):
     def forwards(self, orm):
         # Adding field 'Settings.stg_guihttpsredirect'
         db.add_column(u'system_settings', 'stg_guihttpsredirect',
-                      self.gf('django.db.models.fields.BooleanField')(default=True),
+                      self.gf('django.db.models.fields.BooleanField')(default=False),
                       keep_default=False)
 
-        orm['system.Settings'].objects.update(stg_guihttpsredirect=True)
+        orm['system.Settings'].objects.update(stg_guihttpsredirect=False)
 
 
 
@@ -162,7 +162,7 @@ class Migration(DataMigration):
             'stg_directoryservice': ('django.db.models.fields.CharField', [], {'max_length': '120', 'blank': 'True'}),
             'stg_guiaddress': ('django.db.models.fields.CharField', [], {'default': "'0.0.0.0'", 'max_length': '120', 'blank': 'True'}),
             'stg_guihttpsport': ('django.db.models.fields.IntegerField', [], {'default': '443'}),
-            'stg_guihttpsredirect': ('django.db.models.fields.BooleanField', [], {'default': 'True'}),
+            'stg_guihttpsredirect': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
             'stg_guiport': ('django.db.models.fields.IntegerField', [], {'default': '80'}),
             'stg_guiprotocol': ('django.db.models.fields.CharField', [], {'default': "'http'", 'max_length': '120'}),
             'stg_guiv6address': ('django.db.models.fields.CharField', [], {'default': "'::'", 'max_length': '120', 'blank': 'True'}),
