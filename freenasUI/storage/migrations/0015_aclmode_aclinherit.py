@@ -14,7 +14,7 @@ class Migration(DataMigration):
         to handle the case of upgrade from earlie versions
         """
         for vol in orm.Volume.objects.filter(vol_fstype='ZFS'):
-            psave = Popen(["zpool", "import", "-R", "/mnt", vol.vol_name], stdout=PIPE)
+            psave = Popen(["/sbin/zpool", "import", "-R", "/mnt", vol.vol_name], stdout=PIPE)
             if psave.wait() == 0:
                 p1 = Popen(["zfs", "get", "-H", "-o", "value", "aclmode,aclinherit", vol.vol_name], stdout=PIPE)
                 aclmode, aclinherit = p1.communicate()[0].split('\n')[:2]
@@ -22,7 +22,7 @@ class Migration(DataMigration):
                     Popen(["zfs", "set", "aclmode=passthrough", vol.vol_name], stdout=PIPE).communicate()
                 if aclinherit != 'passthrough':
                     Popen(["zfs", "set", "aclinherit=passthrough", vol.vol_name], stdout=PIPE).communicate()
-            psave = Popen(["zpool", "export", vol.vol_name], stdout=PIPE)
+            psave = Popen(["/sbin/zpool", "export", vol.vol_name], stdout=PIPE)
             psave.wait()
 
     def backwards(self, orm):

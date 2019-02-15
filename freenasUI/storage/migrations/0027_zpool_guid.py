@@ -14,10 +14,10 @@ class Migration(DataMigration):
         Because of this we have to import the pool using its GUID
         """
         for vol in orm.Volume.objects.filter(vol_fstype='ZFS'):
-            psave = Popen(["zpool", "import", "-R", "/mnt", vol.vol_name], stdout=PIPE)
+            psave = Popen(["/sbin/zpool", "import", "-R", "/mnt", vol.vol_name], stdout=PIPE)
             psave.wait()
 
-            p1 = Popen(["zpool", "get", "guid", vol.vol_name], stdout=PIPE)
+            p1 = Popen(["/sbin/zpool", "get", "guid", vol.vol_name], stdout=PIPE)
             if p1.wait() != 0:
                 continue
 
@@ -25,7 +25,7 @@ class Migration(DataMigration):
             vol.vol_guid = re.sub('\s+', ' ', line).split(' ')[2]
             vol.save()
 
-            psave = Popen(["zpool", "export", vol.vol_name], stdout=PIPE)
+            psave = Popen(["/sbin/zpool", "export", vol.vol_name], stdout=PIPE)
             psave.wait()
 
     def backwards(self, orm):
