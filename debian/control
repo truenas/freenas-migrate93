@@ -1,0 +1,17 @@
+Source: migrate93
+Section: admin
+Priority: optional
+Maintainer: William Grzybowski <william@grzy.org>
+Build-Depends: debhelper-compat (= 12),
+               python3-all
+Standards-Version: 4.4.0
+Homepage: http://www.freenas.org
+
+Package: migrate93
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, python3
+Description: Legacy migration for django south
+ This package contains the legacy django code for FreeNAS.
+ .
+ Most of the code has already been deprecated, except the models along with
+ migrations that are used in middlewared.

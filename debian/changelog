@@ -1,0 +1,5 @@
+migrate93 (0.0-1) unstable; urgency=medium
+
+  * Initial release (Closes: #55555)
+
+ -- William Grzybowski <william@grzy.org>  Thu, 08 Aug 2019 14:25:01 -0300
