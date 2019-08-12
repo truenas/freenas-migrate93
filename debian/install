@@ -1,4 +1,5 @@
 django usr/lib/migrate93/
 freenasUI usr/lib/migrate93/
-src usr/lib/migrate93/
 sbin/migrate93 usr/sbin/
+south usr/lib/migrate93/
+src usr/lib/migrate93/
