@@ -36,7 +36,10 @@ actions.
 
 from __future__ import print_function
 from collections import defaultdict
-from bsd import sysctl
+try:
+    from bsd import sysctl
+except ImportError:
+    sysctl = None
 import base64
 from Crypto.Cipher import AES
 import ctypes
@@ -460,6 +463,8 @@ class notifier:
         """
         Tiny wrapper for sysctl module for compatibility
         """
+        if not sysctl:
+            return None
         sysc = sysctl.sysctlbyname(name)
         if sysc is not None:
             return sysc
