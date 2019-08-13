@@ -9,6 +9,7 @@ Homepage: http://www.freenas.org
 Package: migrate93
 Architecture: any
 Depends: python3,
+         python3-crypto,
          python3-lxml,
          ${misc:Depends},
          ${shlibs:Depends}
