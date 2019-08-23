@@ -137,17 +137,10 @@ INSTALLED_APPS = [
     'freenasUI.storage',
     'freenasUI.system',
     'freenasUI.tasks',
+    'freenasUI.truenas',
+    'freenasUI.failover',
     'freenasUI.vcp'
 ]
-
-if os.path.exists('/etc/version'):
-    with open('/etc/version', 'r') as f:
-        version = f.read().lower()
-    if 'truenas' in version:
-        INSTALLED_APPS += [
-            'freenasUI.truenas',
-            'freenasUI.failover',
-        ]
 
 FORCE_SCRIPT_NAME = ''
 
