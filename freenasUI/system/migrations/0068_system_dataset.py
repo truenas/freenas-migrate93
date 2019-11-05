@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 from south.db import db
 from south.v2 import DataMigration
-from freenasUI.middleware.notifier import notifier
 
 class Migration(DataMigration):
 
@@ -17,8 +16,7 @@ class Migration(DataMigration):
 
              sys.sys_pool = adv.adv_system_pool
              sys.sys_syslog_usedataset = adv.adv_syslog_usedataset
-             # Use rrd dataset by default only for FreeNAS
-             sys.sys_rrd_usedataset = notifier().is_freenas()
+             sys.sys_rrd_usedataset = True
              sys.save()
 
         except Exception as e:

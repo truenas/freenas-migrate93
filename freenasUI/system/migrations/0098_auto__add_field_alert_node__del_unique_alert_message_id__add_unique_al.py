@@ -18,10 +18,9 @@ class Migration(SchemaMigration):
 
         if not db.dry_run:
             _n = notifier()
-            if not _n.is_freenas():
-                from freenasUI.failover.utils import failover_licensed, failover_node
-                if failover_licensed() and failover_node() == 'B':
-                    orm['system.Alert'].objects.update(node='B')
+            from freenasUI.failover.utils import failover_licensed, failover_node
+            if failover_licensed() and failover_node() == 'B':
+                orm['system.Alert'].objects.update(node='B')
 
         # Adding unique constraint on 'Alert', fields ['node', 'message_id']
         db.create_unique(u'system_alert', ['node', 'message_id'])

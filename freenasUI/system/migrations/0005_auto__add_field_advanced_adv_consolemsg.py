@@ -1,7 +1,6 @@
 # encoding: utf-8
 from south.db import db
 from south.v2 import DataMigration
-from freenasUI.middleware.notifier import notifier
 
 
 class Migration(DataMigration):
@@ -11,12 +10,11 @@ class Migration(DataMigration):
         # Adding field 'Advanced.adv_consolemsg'
         db.add_column('system_advanced', 'adv_consolemsg', self.gf('django.db.models.fields.BooleanField')(default=0), keep_default=False)
 
-        truenas = not(notifier().is_freenas())
-
-        # Set adv_consolemsg to True for TrueNAS
+        # Workaround south bug
         orm['system.Advanced'].objects.update(
-            adv_consolemsg=truenas,
+            adv_consolemsg=False,
         )
+
 
     def backwards(self, orm):
         # Deleting field 'Advanced.adv_consolemsg'

@@ -2,8 +2,6 @@
 from south.db import db
 from south.v2 import DataMigration
 
-from freenasUI.middleware.notifier import notifier
-
 
 class Migration(DataMigration):
 
@@ -12,14 +10,9 @@ class Migration(DataMigration):
         # Adding field 'Advanced.adv_autotune'
         db.add_column('system_advanced', 'adv_autotune', self.gf('django.db.models.fields.BooleanField')(default=0), keep_default=False)
 
-        if not notifier().is_freenas():
-            adv_autotune = True
-        else:
-            adv_autotune = False
-
         # Workaround south bug
         orm['system.Advanced'].objects.update(
-            adv_autotune=adv_autotune,
+            adv_autotune=False,
         )
 
 

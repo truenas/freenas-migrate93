@@ -10,26 +10,7 @@ from freenasUI.middleware.notifier import notifier
 class Migration(DataMigration):
 
     def forwards(self, orm):
-        """
-        For TrueNAS we want to disable use of rrd dataset if its in
-        freenas-boot because of SATA DOM wearing out.
-        We touch a sentinel file to migrate data from system dataset on boot,
-        using the ix-sysrrd_disable script.
-        """
-        if notifier().is_freenas():
-            return
-
-        for sys in orm['system.SystemDataset'].objects.all():
-            if sys.sys_pool != 'freenas-boot':
-                continue
-            sys.sys_rrd_usedataset = False
-            sys.save()
-            try:
-                if not os.path.exists('/data/sentinels'):
-                    os.makedirs('/data/sentinels')
-                open('/data/sentinels/sysdataset-rrd-disable', 'w').close()
-            except:
-                pass
+        pass
 
     def backwards(self, orm):
         pass
