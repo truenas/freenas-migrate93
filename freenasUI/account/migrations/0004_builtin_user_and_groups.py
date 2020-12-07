@@ -1,7 +1,11 @@
 # encoding: utf-8
 import json
 import os
+import platform
 from south.v2 import DataMigration
+
+IS_LINUX = platform.system().lower() == 'linux'
+
 
 class Migration(DataMigration):
 
@@ -24,6 +28,12 @@ class Migration(DataMigration):
         users = json.loads(data)
         for entry in users:
             user = orm.bsdUsers(pk=entry['pk'])
+            # bsdUsers.json sets the default shell for root account to
+            # /usr/local/bin/zsh which doesn't exist on SCALE so make
+            # sure we set it appropriately
+            if entry['fields']['bsdusr_uid'] == 0 and IS_LINUX:
+                entry['fields']['bsdusr_shell'] = '/usr/bin/zsh'
+
             for field in entry['fields']:
                 mfield = orm.bsdUsers._meta.get_field(field)
                 if mfield.rel != None:
