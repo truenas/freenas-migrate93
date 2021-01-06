@@ -8,7 +8,7 @@
       "bsdusr_uid": 0,
       "bsdusr_group": 1,
       "bsdusr_unixhash": "*",
-      "bsdusr_shell": "/usr/local/bin/zsh",
+      "bsdusr_shell": "/usr/bin/zsh",
       "bsdusr_builtin": true,
       "bsdusr_home": "/root",
       "bsdusr_smbhash": "*"
