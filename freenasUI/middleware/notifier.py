@@ -41,7 +41,7 @@ try:
 except ImportError:
     sysctl = None
 import base64
-from Crypto.Cipher import AES
+from Cryptodome.Cipher import AES
 import ctypes
 import logging
 import os
@@ -622,7 +622,7 @@ class notifier:
             obj.save()
 
     def pwenc_generate_secret(self, reset_passwords=True, _settings=None):
-        from Crypto import Random
+        from Cryptodome import Random
         from django.conf import settings as dsettings
         if _settings is None:
             from freenasUI.system.models import Settings
@@ -667,8 +667,8 @@ class notifier:
     def pwenc_encrypt(self, text):
         if not isinstance(text, bytes):
             text = text.encode('utf8')
-        from Crypto.Random import get_random_bytes
-        from Crypto.Util import Counter
+        from Cryptodome.Random import get_random_bytes
+        from Cryptodome.Util import Counter
         pad = lambda x: x + (PWENC_BLOCK_SIZE - len(x) % PWENC_BLOCK_SIZE) * PWENC_PADDING
 
         nonce = get_random_bytes(8)
@@ -683,7 +683,7 @@ class notifier:
     def pwenc_decrypt(self, encrypted=None):
         if not encrypted:
             return ""
-        from Crypto.Util import Counter
+        from Cryptodome.Util import Counter
         encrypted = base64.b64decode(encrypted)
         nonce = encrypted[:8]
         encrypted = encrypted[8:]
