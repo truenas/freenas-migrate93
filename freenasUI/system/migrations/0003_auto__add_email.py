@@ -22,7 +22,6 @@ class Migration(DataMigration):
         db.send_create_signal('system', ['Email'])
 
         em = orm.Email()
-        em.em_fromemail = 'root@%s.local' % (get_sw_name().lower(), )
         em.em_port = 25
         em.em_smtp = False
         em.save()
