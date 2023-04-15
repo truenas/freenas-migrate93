@@ -1,4 +1,5 @@
 import collections
+import collections.abc
 from math import ceil
 
 from django.utils import six
@@ -103,7 +104,7 @@ class Paginator(object):
 QuerySetPaginator = Paginator   # For backwards-compatibility.
 
 
-class Page(collections.Sequence):
+class Page(collections.abc.Sequence):
 
     def __init__(self, object_list, number, paginator):
         self.object_list = object_list
