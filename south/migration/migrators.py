@@ -53,8 +53,8 @@ class Migrator(object):
 
     @staticmethod
     def _wrap_direction(direction, orm):
-        signature = inspect.signature(direction)
-        if len(signature.parameters) == 1:
+        args = inspect.getfullargspec(direction)
+        if len(args[0]) == 1:
             # Old migration, no ORM should be passed in
             return direction
         return (lambda: direction(orm))
