@@ -1,6 +1,7 @@
 """Translation helper functions."""
 from __future__ import unicode_literals
 
+import contextlib
 import locale
 import os
 import re
@@ -79,7 +80,8 @@ class DjangoTranslation(gettext_module.GNUTranslations):
     """
     def __init__(self, *args, **kw):
         gettext_module.GNUTranslations.__init__(self, *args, **kw)
-        self.set_output_charset('utf-8')
+        with contextlib.suppress(AttributeError):
+            self.set_output_charset('utf-8')
         self.__language = '??'
 
     def merge(self, other):
@@ -97,6 +99,11 @@ class DjangoTranslation(gettext_module.GNUTranslations):
 
     def __repr__(self):
         return "<DjangoTranslation lang:%s>" % self.__language
+
+    def gettext(self, message: str) -> str:
+        output = super().gettext(message)
+        return output.encode('utf8').decode()
+
 
 def translation(language):
     """

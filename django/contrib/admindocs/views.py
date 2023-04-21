@@ -233,7 +233,7 @@ def model_detail(request, app_label, model_name):
 
     # Gather model methods.
     for func_name, func in model.__dict__.items():
-        if (inspect.isfunction(func) and len(inspect.getargspec(func)[0]) == 1):
+        if inspect.isfunction(func) and len(inspect.getfullargspec(func)[0]) == 1:
             try:
                 for exclude in MODEL_METHODS_EXCLUDE:
                     if func_name.startswith(exclude):

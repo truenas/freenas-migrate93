@@ -1,4 +1,5 @@
 import collections
+import collections.abc
 import sys
 
 from django.conf import settings
@@ -345,7 +346,7 @@ def get_validation_errors(outfile, app=None):
         # Check unique_together.
         for ut in opts.unique_together:
             validate_local_fields(e, opts, "unique_together", ut)
-        if not isinstance(opts.index_together, collections.Sequence):
+        if not isinstance(opts.index_together, collections.abc.Sequence):
             e.add(opts, '"index_together" must a sequence')
         else:
             for it in opts.index_together:
@@ -357,7 +358,7 @@ def get_validation_errors(outfile, app=None):
 def validate_local_fields(e, opts, field_name, fields):
     from django.db import models
 
-    if not isinstance(fields, collections.Sequence):
+    if not isinstance(fields, collections.abc.Sequence):
         e.add(opts, 'all %s elements must be sequences' % field_name)
     else:
         for field in fields:
